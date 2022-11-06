@@ -72,7 +72,7 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showNewPostOrverlay,
         tooltip: "Create New Post",
-        child: Icon(Icons.add),
+        child: Icon(Icons.add_comment),
         ),
     );
   }
@@ -88,8 +88,10 @@ class AccountScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('アカウント'),
       ),
-      body: const Center(
+      body: SafeArea(
+        child: Center(
           child: Text('アカウント画面', style: TextStyle(fontSize: 32.0))),
+      ),
     );
   }
 }
@@ -103,8 +105,10 @@ class SearchScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('探す'),
       ),
-      body: const Center(
+      body: SafeArea(
+        child: Center(
           child: Text('探す画面', style: TextStyle(fontSize: 32.0))),
+      ),
     );
   }
 }
@@ -118,8 +122,10 @@ class ReactionScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('反響'),
       ),
-      body: const Center(
+      body: SafeArea(
+        child: Center(
           child: Text('反響画面', style: TextStyle(fontSize: 32.0))),
+      ),
     );
   }
 }
@@ -133,8 +139,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('ホーム'),
       ),
-      body:
-          const Center(child: Text('ホーム画面', style: TextStyle(fontSize: 32.0))),
+      body: SafeArea(
+        child: Center(
+           child: Text('ホーム画面', style: TextStyle(fontSize: 32.0)),
+        ),
+      ),
     );
   }
 }
@@ -148,8 +157,11 @@ class NotificationScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('お知らせ'),
       ),
-      body:
-          const Center(child: Text('お知らせ画面', style: TextStyle(fontSize: 32.0))),
+      body: SafeArea(
+        child: Center(
+          child: Text('お知らせ画面', style: TextStyle(fontSize: 32.0)),
+        ),
+      ),
     );
   }
 }

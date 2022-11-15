@@ -1,72 +1,34 @@
 
 import 'package:flutter/material.dart';
+import 'navigation/main.dart';
+import 'navigation/home.dart';
+import 'navigation/search.dart';
+import 'navigation/reaction.dart';
+import 'navigation/notification.dart';
+import 'navigation/account.dart';
+import '../pages/post/post.dart';
 
 void main() {
   runApp( MyApp());
 }
 
-class HomeRoutes{
-    static final homeRoutes = <String,WidgetBuilder>{
-    "/" : (context) => HomeScreen(),
-    "/home/second" : (context) => NewPost(),
-  };
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState get navigatorState => navigatorKey.currentState!;
-
-}
-class SearchRoutes{
-    static final searchRoutes = <String,WidgetBuilder>{
-    "/" : (context) => SearchScreen(),
-    "/search/second" : (context) => NewPost(),
-  };
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState get navigatorState => navigatorKey.currentState!;
-
-}
-class NotificationRoutes{
-    static final notificationRoutes = <String,WidgetBuilder>{
-    "/" : (context) => NotificationScreen(),
-    "/notification/second" : (context) => NewPost(),
-  };
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState get navigatorState => navigatorKey.currentState!;
-}
-class ReactionRoutes{
-    static final reactionRoutes = <String,WidgetBuilder>{
-    "/" : (context) => ReactionScreen(),
-    "/reaction/second" : (context) => NewPost(),
-  };
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState get navigatorState => navigatorKey.currentState!;
-}
-class AccountRoutes{
-    static final accountRoutes = <String,WidgetBuilder>{
-    "/" : (context) => AccountScreen(),
-    "/account/second" : (context) => NewPost(),
-  };
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState get navigatorState => navigatorKey.currentState!;
-}
-
-
-
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final GlobalKey<NavigatorState> _rootNavigationKey = GlobalKey();
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: MainNav.navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MainPage(),
-      routes: {
-        "/addNewPost" : (_) => NewPost(),
+      onGenerateRoute: (settings) {
+        var builder = SearchNav.searchRoutes[settings.name]!;
+        return MaterialPageRoute(builder: builder,settings: settings);
       },
+      routes: 
+        MainNav.mainRoutes
     );
   }
 }
@@ -84,104 +46,39 @@ class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   int _previousIndex = 0;
   void _onItemTapped(int index) {
+
     setState(() {
       _selectedIndex = index;
-
-
       if(_previousIndex == _selectedIndex){
         switch (_selectedIndex) {
           case 0:
-            HomeRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            HomeNav.backToMain();
             break;
           case 1:
-            SearchRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            SearchNav.backToMain();
             break;
           case 2:
-            NotificationRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            NotificationNav.backToMain();
             break;
           case 3:
-            ReactionRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            ReactionNav.backToMain();
             break;
           case 4:
-            AccountRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            AccountNav.backToMain();
             break;
           default:
         }
       }
       _previousIndex = _selectedIndex;
-
     });
   }
 
-  // int _previousIndex = 0;
-
   Future<void> _showNewPostOrverlay()async{
-    AppNav.toNewPostOrverlay(context);
+    MainNav.toNewPostOrverlay(context);
   }
 
   @override
   Widget build(BuildContext context) {
-
-  // Widget _nav =  Stack(
-  //     fit: StackFit.expand,
-  //     children: [
-  //       Offstage(
-  //         offstage: _selectedIndex != 0,
-  //         child: Navigator(
-  //           key: HomeRoutes.navigatorKey,
-  //           onGenerateRoute: (settings) {
-  //             var builder = HomeRoutes.homeRoutes[settings.name]!;
-  //             return MaterialPageRoute(builder: builder,settings: settings);
-  //             // if(settings.name == "/"){
-  //             //   return MaterialPageRoute(builder: (context) => HomeScreen(),settings: settings);
-  //             // }
-  //           },
-  //         ) ,
-  //       ),
-  //       Offstage(
-  //         offstage: _selectedIndex != 1,
-  //         child: Navigator(
-  //           key: SearchRoutes.navigatorKey,
-  //           onGenerateRoute: (settings) {
-  //             var builder = SearchRoutes.searchRoutes[settings.name]!;
-  //             return MaterialPageRoute(builder: builder,settings: settings);
-  //           },
-  //         ) ,
-  //       ),
-  //       Offstage(
-  //         offstage: _selectedIndex != 2,
-  //         child: Navigator(
-  //           key: NotificationRoutes.navigatorKey,
-  //           onGenerateRoute: (settings) {
-  //             var builder = NotificationRoutes.notificationRoutes[settings.name]!;
-  //             return MaterialPageRoute(builder: builder,settings: settings);
-  //           },
-  //         ) ,
-  //       ),
-  //       Offstage(
-  //         offstage: _selectedIndex != 3,
-  //         child: Navigator(
-  //           key: ReactionRoutes.navigatorKey,
-  //           onGenerateRoute: (settings) {
-  //             var builder = ReactionRoutes.reactionRoutes[settings.name]!;
-  //             return MaterialPageRoute(builder: builder,settings: settings);
-  //           },
-  //         ) ,
-  //       ),
-  //       Offstage(
-  //         offstage: _selectedIndex != 4,
-  //         child: Navigator(
-  //           key: AccountRoutes.navigatorKey,
-  //           onGenerateRoute: (settings) {
-  //             var builder = AccountRoutes.accountRoutes[settings.name]!;
-  //             return MaterialPageRoute(builder: builder,settings: settings);
-  //           },
-  //         ) ,
-  //       ),
-  //     ]
-  //   );
-
-  //   _previousIndex = _selectedIndex;
 
     return Scaffold(
       body: BottomNavigation(index: _selectedIndex),
@@ -225,9 +122,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Offstage(
           offstage: widget.index != 0,
           child: Navigator(
-            key: HomeRoutes.navigatorKey,
+            key: HomeNav.navigatorKey,
             onGenerateRoute: (settings) {
-              var builder = HomeRoutes.homeRoutes[settings.name]!;
+              var builder = HomeNav.homeRoutes[settings.name]!;
               return MaterialPageRoute(builder: builder,settings: settings);
               // if(settings.name == "/"){
               //   return MaterialPageRoute(builder: (context) => HomeScreen(),settings: settings);
@@ -238,9 +135,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Offstage(
           offstage: widget.index != 1,
           child: Navigator(
-            key: SearchRoutes.navigatorKey,
+            key: SearchNav.navigatorKey,
             onGenerateRoute: (settings) {
-              var builder = SearchRoutes.searchRoutes[settings.name]!;
+              var builder = SearchNav.searchRoutes[settings.name]!;
               return MaterialPageRoute(builder: builder,settings: settings);
             },
           ) ,
@@ -248,9 +145,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Offstage(
           offstage: widget.index != 2,
           child: Navigator(
-            key: NotificationRoutes.navigatorKey,
+            key: NotificationNav.navigatorKey,
             onGenerateRoute: (settings) {
-              var builder = NotificationRoutes.notificationRoutes[settings.name]!;
+              var builder = NotificationNav.notificationRoutes[settings.name]!;
               return MaterialPageRoute(builder: builder,settings: settings);
             },
           ) ,
@@ -258,9 +155,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Offstage(
           offstage: widget.index != 3,
           child: Navigator(
-            key: ReactionRoutes.navigatorKey,
+            key: ReactionNav.navigatorKey,
             onGenerateRoute: (settings) {
-              var builder = ReactionRoutes.reactionRoutes[settings.name]!;
+              var builder = ReactionNav.reactionRoutes[settings.name]!;
               return MaterialPageRoute(builder: builder,settings: settings);
             },
           ) ,
@@ -268,9 +165,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         Offstage(
           offstage: widget.index != 4,
           child: Navigator(
-            key: AccountRoutes.navigatorKey,
+            key: AccountNav.navigatorKey,
             onGenerateRoute: (settings) {
-              var builder = AccountRoutes.accountRoutes[settings.name]!;
+              var builder = AccountNav.accountRoutes[settings.name]!;
               return MaterialPageRoute(builder: builder,settings: settings);
             },
           ) ,
@@ -278,153 +175,4 @@ class _BottomNavigationState extends State<BottomNavigation> {
       ]
     );
   }
-}
-
-
-
-
-class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('アカウント'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Text('アカウント画面', style: TextStyle(fontSize: 32.0))),
-      ),
-    );
-  }
-}
-
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Future<void> toSearchSecond()async{
-      AppNav.toSearchSecondPage(context);
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('探す'),
-      ),
-      body: SafeArea(
-        child: Center(
-           child: Column(
-            children: [
-              Text('探す画面', style: TextStyle(fontSize: 32.0)),
-              ElevatedButton(
-                onPressed: toSearchSecond, 
-                child: Text("次へ"))
-            ],
-           )
-        ),
-      ),
-    );
-  }
-}
-
-class ReactionScreen extends StatelessWidget {
-  const ReactionScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('反響'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Text('反響画面', style: TextStyle(fontSize: 32.0))),
-      ),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Future<void> toHomeSecond()async{
-      AppNav.toHomeSecondPage(context);
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ホーム'),
-      ),
-      body: SafeArea(
-        child: Center(
-           child: Column(
-            children: [
-              Text('ホーム画面', style: TextStyle(fontSize: 32.0)),
-              ElevatedButton(
-                onPressed: toHomeSecond, 
-                child: Text("次へ"))
-            ],
-           )
-        ),
-      ),
-    );
-  }
-}
-
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('お知らせ'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Text('お知らせ画面', style: TextStyle(fontSize: 32.0)),
-        ),
-      ),
-    );
-  }
-}
-
-class NewPost extends StatelessWidget {
-  const NewPost({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('newpost'),
-      ),
-      body: SafeArea(
-        child: Center(
-          child: Text('newpost', style: TextStyle(fontSize: 32.0)),
-        ),
-      ),
-    );
-  }
-}
-
-
-class AppNav {
-
-  static Future<void> toHomeSecondPage(BuildContext context){
-    return Navigator.of(context).pushNamed('/home/second');
-  }
-
-  static Future<void> toSearchSecondPage(BuildContext context){
-    return Navigator.of(context).pushNamed('/search/second');
-  }
-
-  static Future<void> toNewPostOrverlay(BuildContext context){
-    return Navigator.of(context).pushNamed('/addNewPost');
-  }
-
-
-  
 }

@@ -80,60 +80,40 @@ class MainPage extends StatefulWidget {
   }
 
 class _MainPageState extends State<MainPage> {
-  final  _screens = [
-
-      Navigator(
-        key: HomeRoutes.navigatorKey,
-        onGenerateRoute: (settings) {
-          var builder = HomeRoutes.homeRoutes[settings.name]!;
-          return MaterialPageRoute(builder: builder,settings: settings);
-          // if(settings.name == "/"){
-          //   return MaterialPageRoute(builder: (context) => HomeScreen(),settings: settings);
-          // }
-        },
-      ) ,
-      Navigator(
-        key: SearchRoutes.navigatorKey,
-        onGenerateRoute: (settings) {
-          var builder = SearchRoutes.searchRoutes[settings.name]!;
-          return MaterialPageRoute(builder: builder,settings: settings);
-        },
-      ) ,
-      
-      Navigator(
-        key: NotificationRoutes.navigatorKey,
-        onGenerateRoute: (settings) {
-          var builder = NotificationRoutes.notificationRoutes[settings.name]!;
-          return MaterialPageRoute(builder: builder,settings: settings);
-        },
-      ) ,
-      Navigator(
-        key: ReactionRoutes.navigatorKey,
-        onGenerateRoute: (settings) {
-          var builder = ReactionRoutes.reactionRoutes[settings.name]!;
-          return MaterialPageRoute(builder: builder,settings: settings);
-        },
-      ) ,
-      Navigator(
-        key: AccountRoutes.navigatorKey,
-        onGenerateRoute: (settings) {
-          var builder = AccountRoutes.accountRoutes[settings.name]!;
-          return MaterialPageRoute(builder: builder,settings: settings);
-        },
-      ) ,
-      // HomeScreen(),
-      // SearchScreen(),
-      // NotificationScreen(),
-      // ReactionScreen(),
-      // AccountScreen()
-    ];
 
   int _selectedIndex = 0;
+  int _previousIndex = 0;
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+
+
+      if(_previousIndex == _selectedIndex){
+        switch (_selectedIndex) {
+          case 0:
+            HomeRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            break;
+          case 1:
+            SearchRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            break;
+          case 2:
+            NotificationRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            break;
+          case 3:
+            ReactionRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            break;
+          case 4:
+            AccountRoutes.navigatorKey.currentState!.popUntil(ModalRoute.withName('/'));
+            break;
+          default:
+        }
+      }
+      _previousIndex = _selectedIndex;
+
     });
   }
+
+  // int _previousIndex = 0;
 
   Future<void> _showNewPostOrverlay()async{
     AppNav.toNewPostOrverlay(context);
@@ -141,8 +121,70 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+
+  // Widget _nav =  Stack(
+  //     fit: StackFit.expand,
+  //     children: [
+  //       Offstage(
+  //         offstage: _selectedIndex != 0,
+  //         child: Navigator(
+  //           key: HomeRoutes.navigatorKey,
+  //           onGenerateRoute: (settings) {
+  //             var builder = HomeRoutes.homeRoutes[settings.name]!;
+  //             return MaterialPageRoute(builder: builder,settings: settings);
+  //             // if(settings.name == "/"){
+  //             //   return MaterialPageRoute(builder: (context) => HomeScreen(),settings: settings);
+  //             // }
+  //           },
+  //         ) ,
+  //       ),
+  //       Offstage(
+  //         offstage: _selectedIndex != 1,
+  //         child: Navigator(
+  //           key: SearchRoutes.navigatorKey,
+  //           onGenerateRoute: (settings) {
+  //             var builder = SearchRoutes.searchRoutes[settings.name]!;
+  //             return MaterialPageRoute(builder: builder,settings: settings);
+  //           },
+  //         ) ,
+  //       ),
+  //       Offstage(
+  //         offstage: _selectedIndex != 2,
+  //         child: Navigator(
+  //           key: NotificationRoutes.navigatorKey,
+  //           onGenerateRoute: (settings) {
+  //             var builder = NotificationRoutes.notificationRoutes[settings.name]!;
+  //             return MaterialPageRoute(builder: builder,settings: settings);
+  //           },
+  //         ) ,
+  //       ),
+  //       Offstage(
+  //         offstage: _selectedIndex != 3,
+  //         child: Navigator(
+  //           key: ReactionRoutes.navigatorKey,
+  //           onGenerateRoute: (settings) {
+  //             var builder = ReactionRoutes.reactionRoutes[settings.name]!;
+  //             return MaterialPageRoute(builder: builder,settings: settings);
+  //           },
+  //         ) ,
+  //       ),
+  //       Offstage(
+  //         offstage: _selectedIndex != 4,
+  //         child: Navigator(
+  //           key: AccountRoutes.navigatorKey,
+  //           onGenerateRoute: (settings) {
+  //             var builder = AccountRoutes.accountRoutes[settings.name]!;
+  //             return MaterialPageRoute(builder: builder,settings: settings);
+  //           },
+  //         ) ,
+  //       ),
+  //     ]
+  //   );
+
+  //   _previousIndex = _selectedIndex;
+
     return Scaffold(
-      body: _screens[_selectedIndex],
+      body: BottomNavigation(index: _selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -164,6 +206,81 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
+
+
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({super.key, required this.index});
+
+  final int index;  
+  @override
+  State<BottomNavigation> createState() => _BottomNavigationState();
+}
+
+class _BottomNavigationState extends State<BottomNavigation> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Offstage(
+          offstage: widget.index != 0,
+          child: Navigator(
+            key: HomeRoutes.navigatorKey,
+            onGenerateRoute: (settings) {
+              var builder = HomeRoutes.homeRoutes[settings.name]!;
+              return MaterialPageRoute(builder: builder,settings: settings);
+              // if(settings.name == "/"){
+              //   return MaterialPageRoute(builder: (context) => HomeScreen(),settings: settings);
+              // }
+            },
+          ) ,
+        ),
+        Offstage(
+          offstage: widget.index != 1,
+          child: Navigator(
+            key: SearchRoutes.navigatorKey,
+            onGenerateRoute: (settings) {
+              var builder = SearchRoutes.searchRoutes[settings.name]!;
+              return MaterialPageRoute(builder: builder,settings: settings);
+            },
+          ) ,
+        ),
+        Offstage(
+          offstage: widget.index != 2,
+          child: Navigator(
+            key: NotificationRoutes.navigatorKey,
+            onGenerateRoute: (settings) {
+              var builder = NotificationRoutes.notificationRoutes[settings.name]!;
+              return MaterialPageRoute(builder: builder,settings: settings);
+            },
+          ) ,
+        ),
+        Offstage(
+          offstage: widget.index != 3,
+          child: Navigator(
+            key: ReactionRoutes.navigatorKey,
+            onGenerateRoute: (settings) {
+              var builder = ReactionRoutes.reactionRoutes[settings.name]!;
+              return MaterialPageRoute(builder: builder,settings: settings);
+            },
+          ) ,
+        ),
+        Offstage(
+          offstage: widget.index != 4,
+          child: Navigator(
+            key: AccountRoutes.navigatorKey,
+            onGenerateRoute: (settings) {
+              var builder = AccountRoutes.accountRoutes[settings.name]!;
+              return MaterialPageRoute(builder: builder,settings: settings);
+            },
+          ) ,
+        ),
+      ]
+    );
+  }
+}
+
+
 
 
 class AccountScreen extends StatelessWidget {
@@ -188,13 +305,24 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future<void> toSearchSecond()async{
+      AppNav.toSearchSecondPage(context);
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('探す'),
       ),
       body: SafeArea(
         child: Center(
-          child: Text('探す画面', style: TextStyle(fontSize: 32.0))),
+           child: Column(
+            children: [
+              Text('探す画面', style: TextStyle(fontSize: 32.0)),
+              ElevatedButton(
+                onPressed: toSearchSecond, 
+                child: Text("次へ"))
+            ],
+           )
+        ),
       ),
     );
   }

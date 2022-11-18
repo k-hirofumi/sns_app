@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/search/searchSecond.dart';
 import '../pages/search/search.dart';
 import '../pages/post/post.dart';
 
 class SearchNav{
     static final searchRoutes = <String,WidgetBuilder>{
     "/" : (context) => SearchScreen(),
-    "/search/second" : (context) => NewPost(),
+    "/search/second" : (context) => SearchSecond(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   static NavigatorState  _navigatorState = navigatorKey.currentState!;

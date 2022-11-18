@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/pages/home/homeSecond.dart';
 import '../pages/home/home.dart';
 import '../pages/post/post.dart';
 
 class HomeNav{
     static final homeRoutes = <String,WidgetBuilder>{
     "/" : (context) => HomeScreen(),
-    "/home/second" : (context) => NewPost(),
+    "/home/second" : (context) => HomeSecond(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   static NavigatorState  _navigatorState = navigatorKey.currentState!;

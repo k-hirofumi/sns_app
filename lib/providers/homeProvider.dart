@@ -17,8 +17,14 @@ class HomeProvider with ChangeNotifier {
 
 
 
-  void count() {
+  void countUp() {
     _cnt++;
+    _pref.setInt('cnt', _cnt);
+    notifyListeners();
+  }
+
+  void countClear() {
+    _cnt = 0;
     _pref.setInt('cnt', _cnt);
     notifyListeners();
   }

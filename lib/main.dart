@@ -21,12 +21,14 @@ void main() async{
 
   final store = InstanceStore();
   store.setInstance(await SharedPreferences.getInstance());
+
   store.setInstance<HomeProvider>(HomeProvider());
   store.setInstance<SearchProvider>(SearchProvider());
   store.setInstance<NotificationProvider>(NotificationProvider());
   store.setInstance<ReactionProvider>(ReactionProvider());
   store.setInstance<AccountProvider>(AccountProvider());
   
+  store.getInstance<HomeProvider>().loadCount();
 
   runApp(
     MultiProvider(
@@ -40,7 +42,6 @@ void main() async{
       child: MyApp(),
       )
     );
-  // HomeProvider. loadCount
 }
 
 class MyApp extends StatelessWidget {

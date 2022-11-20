@@ -19,9 +19,16 @@ class HomeSecond extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              Text('ホーム2', style: TextStyle(fontSize: 32.0)),
-              ElevatedButton(onPressed: (() => _provider.count()), child: Text('カウント！')),
-              Text(_provider.cnt.toString(), style: TextStyle(fontSize: 60.0),),
+              const Text('ホーム2', style: TextStyle(fontSize: 32.0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(onPressed: (() => _provider.countUp()), child: const Text('カウントUP！')),
+                  const Padding(padding: EdgeInsets.only(left: 10, right: 10)),
+                  ElevatedButton(onPressed: (() => _provider.countClear()), child: const Text('クリア')),
+                ],
+              ),
+              Text(_provider.cnt.toString(), style: const TextStyle(fontSize: 60.0),),
             ],
           ),
 

@@ -1,5 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:my_app/instanceStore.dart';
+import 'package:my_app/providers/accountProvider.dart';
+import 'package:my_app/providers/homeProvider.dart';
+import 'package:my_app/providers/notificationProvider.dart';
+import 'package:my_app/providers/reactionProvider.dart';
+import 'package:my_app/providers/searchProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'navigation/main.dart';
 import 'navigation/home.dart';
 import 'navigation/search.dart';
@@ -8,8 +16,31 @@ import 'navigation/notification.dart';
 import 'navigation/account.dart';
 import '../pages/post/post.dart';
 
-void main() {
-  runApp( MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final store = InstanceStore();
+  store.setInstance(await SharedPreferences.getInstance());
+  store.setInstance<HomeProvider>(HomeProvider());
+  store.setInstance<SearchProvider>(SearchProvider());
+  store.setInstance<NotificationProvider>(NotificationProvider());
+  store.setInstance<ReactionProvider>(ReactionProvider());
+  store.setInstance<AccountProvider>(AccountProvider());
+  
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: store.getInstance<HomeProvider>()),
+        ChangeNotifierProvider.value(value: store.getInstance<SearchProvider>()),
+        ChangeNotifierProvider.value(value: store.getInstance<NotificationProvider>()),
+        ChangeNotifierProvider.value(value: store.getInstance<ReactionProvider>()),
+        ChangeNotifierProvider.value(value: store.getInstance<AccountProvider>()),
+      ],
+      child: MyApp(),
+      )
+    );
+  // HomeProvider. loadCount
 }
 
 class MyApp extends StatelessWidget {

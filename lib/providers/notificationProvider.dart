@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/instanceStore.dart';
+import 'package:my_app/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class NotificationProvider with ChangeNotifier {

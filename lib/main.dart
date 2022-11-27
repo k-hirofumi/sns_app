@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:my_app/instanceStore.dart';
+import 'package:my_app/instance_store.dart';
 import 'package:my_app/providers/accountProvider.dart';
 import 'package:my_app/providers/homeProvider.dart';
 import 'package:my_app/providers/notificationProvider.dart';

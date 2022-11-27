@@ -1,8 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:my_app/components/post/post.dart';
+import 'package:my_app/components/post/post_account.dart';
+import 'package:my_app/components/post/post_image.dart';
+import 'package:my_app/components/post/post_timeLine.dart';
+import 'package:my_app/network/mock/posts_mock.dart';
+import 'package:my_app/network/model/postInfo_response.dart';
+import 'package:my_app/network/request/home_request.dart';
 import '../../navigation/home.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  var _postsss = <PostInfoResponse>[];
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _postsss = await HomeRequest.getPostForHome() as List<PostInfoResponse>;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,22 +36,31 @@ class HomeScreen extends StatelessWidget {
       HomeNav.toHomeSecondPage();
     }
 
+
+  final posts = <Post>[
+    for(var post in _postsss)
+    Post(
+      postInfoResponse: post
+    )
+  ];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('ホーム'),
       ),
       body: SafeArea(
         child: Center(
-           child: Column(
-            children: [
-              Text('ホーム画面', style: TextStyle(fontSize: 32.0)),
-              ElevatedButton(
-                onPressed: toHomeSecond, 
-                child: Text("次へ"))
-            ],
-           )
+          child:ListView.builder(
+            // padding: const EdgeInsets.all(5),
+            itemCount: posts.length,//List(List名).length
+            itemBuilder: (BuildContext context, int index) {
+              return posts[index];
+            }
+          )
         ),
       ),
     );
   }
 }
+
+

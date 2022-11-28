@@ -18,14 +18,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  var _postsss = <PostInfoResponse>[];
+  List<PostInfoResponse> _postsss = [];
 
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      _postsss = await HomeRequest.getPostForHome() as List<PostInfoResponse>;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      _postsss = (await HomeRequest.getPostForHome())!;
       setState(() {});
     });
   }

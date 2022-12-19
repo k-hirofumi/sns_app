@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:my_app/network/mock/posts_mock.dart';
-import 'package:my_app/network/model/postInfo_response.dart';
+import 'package:sns_app/network/mock/posts_mock.dart';
+import 'package:sns_app/network/model/postInfo_response.dart';
 
 class HomeRequest {
   // static Future<PostInfoResponse> getPostForHome() async {

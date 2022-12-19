@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:my_app/instance_store.dart';
-import 'package:my_app/providers/accountProvider.dart';
-import 'package:my_app/providers/homeProvider.dart';
-import 'package:my_app/providers/notificationProvider.dart';
-import 'package:my_app/providers/reactionProvider.dart';
-import 'package:my_app/providers/searchProvider.dart';
+import 'package:sns_app/instance_store.dart';
+import 'package:sns_app/providers/accountProvider.dart';
+import 'package:sns_app/providers/homeProvider.dart';
+import 'package:sns_app/providers/notificationProvider.dart';
+import 'package:sns_app/providers/reactionProvider.dart';
+import 'package:sns_app/providers/searchProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'navigation/main.dart';
@@ -112,19 +112,20 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
 
+    const items =  <BottomNavigationBarItem>[
+      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+      BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す'),
+      BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'お知らせ'),
+      BottomNavigationBarItem(icon: Icon(Icons.emoji_people), label: '反響'),
+      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'マイページ'),
+    ];
+
     return Scaffold(
       body: BottomNavigation(index: _selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '探す'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.notifications), label: 'お知らせ'),
-          BottomNavigationBarItem(icon: Icon(Icons.emoji_people), label: '反響'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'マイページ'),
-        ],
+        items: items,
         type: BottomNavigationBarType.fixed,
       ),
       floatingActionButton: FloatingActionButton(
@@ -136,23 +137,18 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-
-class BottomNavigation extends StatefulWidget {
+class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key, required this.index});
 
   final int index;  
   @override
-  State<BottomNavigation> createState() => _BottomNavigationState();
-}
-
-class _BottomNavigationState extends State<BottomNavigation> {
-  @override
   Widget build(BuildContext context) {
+
     return Stack(
       fit: StackFit.expand,
       children: [
         Offstage(
-          offstage: widget.index != 0,
+          offstage: index != 0,
           child: Navigator(
             key: HomeNav.navigatorKey,
             onGenerateRoute: (settings) {
@@ -165,7 +161,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ) ,
         ),
         Offstage(
-          offstage: widget.index != 1,
+          offstage: index != 1,
           child: Navigator(
             key: SearchNav.navigatorKey,
             onGenerateRoute: (settings) {
@@ -175,7 +171,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ) ,
         ),
         Offstage(
-          offstage: widget.index != 2,
+          offstage: index != 2,
           child: Navigator(
             key: NotificationNav.navigatorKey,
             onGenerateRoute: (settings) {
@@ -185,7 +181,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ) ,
         ),
         Offstage(
-          offstage: widget.index != 3,
+          offstage: index != 3,
           child: Navigator(
             key: ReactionNav.navigatorKey,
             onGenerateRoute: (settings) {
@@ -195,7 +191,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           ) ,
         ),
         Offstage(
-          offstage: widget.index != 4,
+          offstage: index != 4,
           child: Navigator(
             key: AccountNav.navigatorKey,
             onGenerateRoute: (settings) {

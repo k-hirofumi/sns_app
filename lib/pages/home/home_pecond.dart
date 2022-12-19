@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:my_app/providers/homeProvider.dart';
+import 'package:sns_app/providers/homeProvider.dart';
 
 
 class HomeSecond extends StatelessWidget {

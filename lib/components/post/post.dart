@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/components/post/post_account.dart';
-import 'package:my_app/components/post/post_image.dart';
-import 'package:my_app/components/post/post_timeLine.dart';
-import 'package:my_app/network/model/postInfo_response.dart';
-import 'package:my_app/pages/home/home.dart';
+import 'package:sns_app/components/post/post_account.dart';
+import 'package:sns_app/components/post/post_image.dart';
+import 'package:sns_app/components/post/post_timeLine.dart';
+import 'package:sns_app/network/model/postInfo_response.dart';
+import 'package:sns_app/pages/home/home.dart';
 
 class Post extends StatelessWidget {
   const Post({super.key, required this.postInfoResponse});

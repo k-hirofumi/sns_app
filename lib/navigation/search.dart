@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/pages/search/search_second.dart';
+import 'package:sns_app/pages/search/search_second.dart';
 import '../pages/search/search.dart';
 import '../pages/post/post.dart';
 

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     // );
     return  CupertinoApp(
       // navigatorKey: ,
-      home: MyHomePage(title:'my_app'),
+      home: MyHomePage(title:'sns_app'),
       // routes: 
       //   {
       //     '/second': (context) => SecondPage(),

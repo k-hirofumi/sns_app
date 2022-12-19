@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/pages/home/home_pecond.dart';
+import 'package:sns_app/pages/home/home_pecond.dart';
 import '../pages/home/home.dart';
 import '../pages/post/post.dart';
 

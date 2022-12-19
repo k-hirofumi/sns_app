@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/network/model/postInfo_response.dart';
-import 'package:my_app/pages/home/home.dart';
+import 'package:sns_app/network/model/postInfo_response.dart';
+import 'package:sns_app/pages/home/home.dart';
 
 class PostTimeLine extends StatelessWidget {
   const PostTimeLine({super.key, required this.post});

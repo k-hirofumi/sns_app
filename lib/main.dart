@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:sns_app/instance_store.dart';
 import 'package:sns_app/providers/accountProvider.dart';
+import 'package:sns_app/providers/appProvider.dart';
 import 'package:sns_app/providers/homeProvider.dart';
 import 'package:sns_app/providers/notificationProvider.dart';
 import 'package:sns_app/providers/reactionProvider.dart';
@@ -14,7 +14,6 @@ import 'navigation/search.dart';
 import 'navigation/reaction.dart';
 import 'navigation/notification.dart';
 import 'navigation/account.dart';
-import '../pages/post/post.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +21,7 @@ void main() async{
   final store = InstanceStore();
   store.setInstance(await SharedPreferences.getInstance());
 
+  store.setInstance<AppProvider>(AppProvider());
   store.setInstance<HomeProvider>(HomeProvider());
   store.setInstance<SearchProvider>(SearchProvider());
   store.setInstance<NotificationProvider>(NotificationProvider());
@@ -33,20 +33,21 @@ void main() async{
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider.value(value: store.getInstance<AppProvider>()),
         ChangeNotifierProvider.value(value: store.getInstance<HomeProvider>()),
         ChangeNotifierProvider.value(value: store.getInstance<SearchProvider>()),
         ChangeNotifierProvider.value(value: store.getInstance<NotificationProvider>()),
         ChangeNotifierProvider.value(value: store.getInstance<ReactionProvider>()),
         ChangeNotifierProvider.value(value: store.getInstance<AccountProvider>()),
       ],
-      child: MyApp(),
+      child: MyApp()
       )
     );
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
+  final provider = InstanceStore().getInstance<AppProvider>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,11 +57,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
       ),
       onGenerateRoute: (settings) {
-        var builder = SearchNav.searchRoutes[settings.name]!;
+        var builder = provider.isLogin ? MainNav.mainRoutes[settings.name]! : MainNav.mainRoutes["/login"]!;
+
         return MaterialPageRoute(builder: builder,settings: settings);
       },
-      routes: 
-        MainNav.mainRoutes
+      // routes: 
+      //   MainNav.mainRoutes
     );
   }
 }
@@ -77,8 +79,18 @@ class _MainPageState extends State<MainPage> {
 
   int _selectedIndex = 0;
   int _previousIndex = 0;
-  void _onItemTapped(int index) {
 
+  final accountProvider = InstanceStore().getInstance<AccountProvider>();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await accountProvider.getUserInfo();
+    });
+  }
+
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
       if(_previousIndex == _selectedIndex){

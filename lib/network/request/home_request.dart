@@ -12,8 +12,6 @@ class HomeRequest {
     var response = await Dio().get('https://jsonplaceholder.typicode.com/todos/1'
     ).then((response) {
 
-
-
       //mockです
       var posts = <PostInfoResponse>[];
       for (var post in posts_mock){
@@ -33,4 +31,3 @@ class HomeRequest {
     return response;
   }
 }
-

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sns_app/instance_store.dart';
+import 'package:sns_app/utils/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sns_app/network/model/userInfo_response.dart';
 import 'package:sns_app/network/request/get_user_info_request.dart';
@@ -19,10 +19,14 @@ class AccountProvider with ChangeNotifier {
   String get email => _email;
 
   Future<void> getUserInfo() async{
-    UserInfoResponse? _userInfo = await GetUserInfoRequest.getUserInfo();
-    _userId = _userInfo!.userId;
-    _name = _userInfo!.name;
-    _email = _userInfo!.email;
+      final result = await GetUserInfoRequest.getUserInfo();
+      // UserInfoResponse? _userInfo = UserInfoResponse.fromJson(result);
+      if(result != null){
+      _userId = result!.userId;
+      _name = result!.name;
+      _email = result!.email;
+      }
+
     // _pref.setBool('isLogin', _isLogin);
     notifyListeners();
   }

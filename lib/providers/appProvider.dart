@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sns_app/instance_store.dart';
+import 'package:sns_app/navigation/main.dart';
+import 'package:sns_app/utils/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sns_app/network/request/get_user_info_request.dart';
 import 'package:sns_app/network/request/login_request.dart';
@@ -16,11 +17,12 @@ class AppProvider with ChangeNotifier {
   bool get isLogin => _isLogin;
 
   Future<void> login() async{
-    final String? id = await LoginRequest.login();
-    if(id != null) {
-      setTokenId(id);
+    final result = await LoginRequest.login();
+    if(result.accessToken != null) {
+      setAccessToken(result.accessToken);
       _isLogin = true;
       _pref.setBool('isLogin', _isLogin);
+      MainNav.toMain();
     } else{
       return;
     }
@@ -33,19 +35,19 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-    String _tokenId  = "";
+  String _accessToken  = "";
 
-  String get tokenId => _tokenId;
+  String get accessToken => _accessToken;
   
 
-  void setTokenId(String id) {
+  void setAccessToken(String id) {
     // コンソールに表示
-    _tokenId = id;
+    _accessToken = id;
     notifyListeners();
   }
 
-  void clearTokenId() {
-    _tokenId = "";
+  void clearAccessToken() {
+    _accessToken = "";
     notifyListeners();
   }
 }

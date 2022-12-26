@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sns_app/instance_store.dart';
+import 'package:sns_app/utils/instance_store.dart';
 import 'package:sns_app/navigation/main.dart';
 import 'package:sns_app/providers/accountProvider.dart';
 import 'package:sns_app/providers/appProvider.dart';
@@ -20,7 +20,6 @@ class _LoginFormState extends State<LoginForm> {
       // 入力データが正常な場合の処理
       _formKey.currentState!.save();
       await appProvider.login();
-      MainNav.toMain();
     }
   }
 

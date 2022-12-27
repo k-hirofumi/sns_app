@@ -23,7 +23,7 @@ extension ApiSearvice on Dio {
       options: Options(
         headers: {
           ...header,
-          if(provider.accessToken != "")  "Authorization": "Bearer "+ provider.accessToken,
+          if(provider.accessToken != "")  "Authorization": provider.accessToken,
         },
       ),
     ).then((response) {
@@ -53,7 +53,7 @@ extension ApiSearvice on Dio {
       options: Options(
         headers: {
           ...header,
-          if(provider.accessToken != "")  "Authorization": "Bearer "+ provider.accessToken,
+          if(provider.accessToken != "")  "Authorization": provider.accessToken,
         },
       ),
     ).then((response) {

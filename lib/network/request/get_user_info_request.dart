@@ -13,7 +13,7 @@ class GetUserInfoRequest {
     }catch(error){
       try{
         final error = ErrorResponse.fromJson(result);
-        await MainNav.showErrorMessageDialog(title:error.message,content: "", okButton: true);
+        await MainNav.showErrorMessageDialog(title:error.message,content: error.content, okButton: true);
       }catch(e){
         //エラーレスポンスの形式が不正な場合
         MainNav.showUnexpectErrorDialog(); 

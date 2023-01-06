@@ -8,7 +8,7 @@ import '../pages/post/post.dart';
 class MainNav{
     static final mainRoutes = <String,WidgetBuilder>{
     "/" : (context) => MainPage(),
-    "/addNewPost" : (context) => NewPost(),
+    // "/addNewPost" : (context) => NewPost(),
     "/login" : (context) => LoginForm(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -61,6 +61,12 @@ class MainNav{
   }
 
   static Future<void> toNewPostOrverlay(BuildContext context){
-    return _navigatorState.pushNamed('/addNewPost');
+    // return _navigatorState.pushNamed('/addNewPost');
+    return _navigatorState.push(
+      MaterialPageRoute(
+        builder: (_) => NewPost(),
+        fullscreenDialog: true, // true だとモーダル遷移になる
+      ),
+    );
   }
 }

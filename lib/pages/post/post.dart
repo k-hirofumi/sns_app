@@ -69,9 +69,7 @@ class _NewPostState extends State<NewPost> {
         }
       }
 
-      print(periods);
-      print(events);
-      // await appProvider.login();
+      await appProvider.newPost(periods, events);
     }
   }
 
@@ -93,6 +91,10 @@ class _NewPostState extends State<NewPost> {
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: Text('投稿'),
+        backgroundColor: Colors.grey,
+      ),
       body: Container(
         padding: EdgeInsets.all(32),
         child: Form(
@@ -102,14 +104,14 @@ class _NewPostState extends State<NewPost> {
               // Text(items.toString()),
               ...items.map((item) => textFieldItem(item)),
               ElevatedButton(
-                onPressed: () {
+                onPressed: items.length < 10 ?() {
                   add();
-                },
+                } : null,
                 child: Text("追加"),
               ),
               ElevatedButton(
                 style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.red)),
-                onPressed: () {
+                onPressed:  () {
                   submit();
                 },
                 child: Text("送信"),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sns_app/navigation/main.dart';
+import 'package:sns_app/network/request/new_post_request.dart';
 import 'package:sns_app/utils/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sns_app/network/request/get_user_info_request.dart';
@@ -49,5 +50,13 @@ class AppProvider with ChangeNotifier {
   void clearAccessToken() {
     _accessToken = "";
     notifyListeners();
+  }
+
+  Future<void> newPost(String periods, String events) async{
+    final result = await NewPostRequest.newPost(periods, events);
+    if(result != null){
+      await MainNav.showErrorMessageDialog(title:'投稿が完了しました', content: '', okButton: true);
+      // notifyListeners();
+    }
   }
 }

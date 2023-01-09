@@ -10,21 +10,28 @@ class PostInfoResponse {
   final List<PostTimeLineInfo> timeLine;
   final List<String> images;
 
-  static PostInfoResponse fromJson(Map<String, dynamic> json) {
-    return PostInfoResponse(
-      accountImage: json['account_image_path'],
-      accountName: json['Account_name'],
-      timeLine: [
-        for(var line in json['time_lines'])
-          PostTimeLineInfo(
-            period: line['period'],
-            event: line['event'],
-        ),
-      ],
-      images: [
-        ...json['images']
-      ],
-    );
+  static List<PostInfoResponse>? fromJson(List<dynamic> json) {
+    List<PostInfoResponse> response = [];
+    for(var data in json){
+      response.add(
+        PostInfoResponse(
+          accountImage: data['account_image_path'],
+          accountName: data['account_name'],
+          timeLine: [
+            for(var line in data['time_lines'])
+              PostTimeLineInfo(
+                period: line['period'],
+                event: line['event'],
+            ),
+          ],
+          images: [
+            ...data['images']
+          ],
+        )
+      );
+    }
+
+    return response;
   }
 }
 

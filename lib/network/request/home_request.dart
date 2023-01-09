@@ -1,33 +1,33 @@
 import 'package:dio/dio.dart';
+import 'package:sns_app/navigation/main.dart';
 import 'package:sns_app/network/mock/posts_mock.dart';
+import 'package:sns_app/network/model/error_response.dart';
 import 'package:sns_app/network/model/postInfo_response.dart';
+import 'package:sns_app/utils/api_searvice.dart';
 
 class HomeRequest {
-  // static Future<PostInfoResponse> getPostForHome() async {
-  //    final result = await http.post(Uri.https('example.com', 'whatsit/create'), body: {'key': 'value',});
-  //    return PostInfoResponse.fromJson(result.body[0]);
-  // }
+  static Future<dynamic> getPostForHome() async {
 
-  static Future<List<PostInfoResponse>?> getPostForHome() async {
-    var response = await Dio().get('https://jsonplaceholder.typicode.com/todos/1'
-    ).then((response) {
+    var result;
+    try {
+      result = await ApiSearvice.get('http://localhost/app.api/get_post');
+      return PostInfoResponse.fromJson(result);
 
-      //mockです
-      var posts = <PostInfoResponse>[];
-      for (var post in posts_mock){
-        posts.add(PostInfoResponse.fromJson(post));
+  //     //mockです
+  //     var posts = <PostInfoResponse>[];
+  //     for (var post in posts_mock){
+  //       posts.add(PostInfoResponse.fromJson(post));
+  //     }
+  //     return posts;    
+
+    }catch(e){
+      try{
+        final error = ErrorResponse.fromJson(result);
+        await MainNav.showErrorMessageDialog(title:error.message,content: error.content, okButton: true);
+      }catch(e){
+        //エラーレスポンスの形式が不正な場合
+        MainNav.showUnexpectErrorDialog(); 
       }
-      return posts;      
-      
-
-      // for (var post in response.data.length){
-      //   posts.add(PostInfoResponse.fromJson(response.data));
-      // }
-      // return posts;
-
-    }).catchError((err){
-      throw "getPostForHome error" ;
-   });
-    return response;
+    }
   }
 }

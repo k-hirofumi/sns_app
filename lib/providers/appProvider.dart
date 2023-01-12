@@ -17,8 +17,8 @@ class AppProvider with ChangeNotifier {
 
   bool get isLogin => _isLogin;
 
-  Future<void> login() async{
-    final result = await LoginRequest.login();
+  Future<void> login(String email, String password) async{
+    final result = await LoginRequest.login(email, password);
     if(result.accessToken != null) {
       setAccessToken(result.accessToken);
       _isLogin = true;

@@ -6,15 +6,16 @@ import 'package:sns_app/utils/api_searvice.dart';
 
 class LoginRequest {
 
-  static Future<dynamic> login() async {
+  static Future<dynamic> login(String email, String passowrd) async {
     var result;
     try {
       result = await ApiSearvice.post('http://localhost/app.api/login',
         data: new FormData.fromMap(
           {
+            // "email": email,
+            // "password": passowrd
             "email": "user1@example.com",
             "password": "123456",
-            // "device_name": "test_device"
           }
         )
       );

@@ -15,12 +15,21 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final appProvider = InstanceStore().getInstance<AppProvider>();
   final accountProvider = InstanceStore().getInstance<AccountProvider>();
+  final emailInputController = TextEditingController();
+  final passwordInputController = TextEditingController();
   void submit() async{
     if (_formKey.currentState!.validate()) {
       // 入力データが正常な場合の処理
       _formKey.currentState!.save();
-      await appProvider.login();
+      await appProvider.login(emailInputController.text, passwordInputController.text);
     }
+  }
+
+  @override
+  void dispose() {
+    emailInputController.dispose();
+    passwordInputController.dispose();
+    super.dispose();
   }
 
   @override
@@ -47,6 +56,7 @@ class _LoginFormState extends State<LoginForm> {
                         Container(
                           width: 280,
                           child:TextFormField(
+                            controller: emailInputController,
                             autovalidateMode: AutovalidateMode.disabled,
                             validator: (value) { // _formKey.currentState.validate()でコールされる
                               if (value!.isEmpty) {
@@ -72,6 +82,7 @@ class _LoginFormState extends State<LoginForm> {
                         Container(
                           width: 280,
                           child:TextFormField(
+                            controller: passwordInputController,
                             autovalidateMode: AutovalidateMode.disabled,
                             validator: (value) { // _formKey.currentState.validate()でコールされる
                               if (value!.isEmpty) {

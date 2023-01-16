@@ -21,6 +21,7 @@ class AccountScreen extends StatelessWidget {
     };
 
     final provider = context.watch<AccountProvider>();
+    const flavor = String.fromEnvironment('FLAVOR');
     return Scaffold(
       appBar: AppBar(
         title: const Text('アカウント'),
@@ -31,6 +32,7 @@ class AccountScreen extends StatelessWidget {
             children: [
               Text('アカウント画面', style: TextStyle(fontSize: 32.0)),
               Text(provider.name, style: TextStyle(fontSize: 32.0)),
+              Text(flavor, style: TextStyle(fontSize: 32.0)),
               ElevatedButton(onPressed: error, child: Text('error')),
               ElevatedButton(onPressed: onGetUser, child: Text('getuser')),
             ],

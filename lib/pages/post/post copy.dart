@@ -47,7 +47,7 @@ class _NewPostState extends State<NewPost> {
     if (_formKey.currentState!.validate()) {
       // 入力データが正常な場合の処理
       _formKey.currentState!.save();
-      await appProvider.login();
+      // await appProvider.login();
     }
   }
 

@@ -1,0 +1,12 @@
+//
+//  stg.xcconfig
+//  
+//
+//  Created by 河野　博文 on 2023/01/14.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+FLAVOR=stg
+APP_ID_SUFFIX=.stg

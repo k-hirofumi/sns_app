@@ -40,7 +40,8 @@ dependencies:
   shared_preferences: ^2.0.15
   # http: ^0.13.5
   dio: ^4.0.6
-  flutter_flavor: ^3.1.1
+  # flutter_flavor: ^3.1.1
+  package_info_plus: ^3.0.2
 
 
 dev_dependencies:
@@ -53,6 +54,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+  flutter_launcher_icons: ^0.11.0 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -69,6 +72,7 @@ flutter:
   assets:
     - assets/images/
     - assets/sampleImages/
+    - assets/launcher_icon/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -95,3 +99,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true

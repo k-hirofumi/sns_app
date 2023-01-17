@@ -9,9 +9,9 @@ elif [ "$1" = "stg" ]; then
 
 elif [ "$1" = "prod" ]; then
     mode="prod"
-    
+
 
 fi
 
 echo $baseUrl
-flutter run --dart-define=FLAVOR=$mode --dart-define=BASE_URL=$baseUrl
+flutter build --dart-define=FLAVOR=$mode --dart-define=BASE_URL=$baseUrl

@@ -9,7 +9,7 @@ class NewPostRequest {
   static Future<dynamic> newPost(String periods, String events) async {
     var result;
     try {
-      result = await ApiSearvice.post('http://localhost/app.api/new_post',
+      result = await ApiSearvice.post('/new_post',
         data: new FormData.fromMap(
           {
             "periods": periods,

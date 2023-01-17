@@ -8,7 +8,7 @@ class GetUserInfoRequest {
   static Future<dynamic> getUserInfo() async {
     var result;
     try {
-      result = await ApiSearvice.get('http://localhost/app.api/get_user');
+      result = await ApiSearvice.get('/get_user');
       return UserInfoResponse.fromJson(result);
     }catch(error){
       try{

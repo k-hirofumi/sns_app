@@ -10,7 +10,7 @@ class HomeRequest {
 
     var result;
     try {
-      result = await ApiSearvice.get('http://localhost/app.api/get_post');
+      result = await ApiSearvice.get('/get_post');
       return PostInfoResponse.fromJson(result);
 
   //     //mockです

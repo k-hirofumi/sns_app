@@ -18,7 +18,7 @@ extension ApiSearvice on Dio {
     // void Function(int, int)? onReceiveProgress,
   }) async{
     print("get");
-    return await Dio().get(pass,
+    return await Dio().get(const String.fromEnvironment('BASE_URL') + pass,
       queryParameters: queryParameters,
       options: Options(
         headers: {
@@ -47,7 +47,8 @@ extension ApiSearvice on Dio {
     // void Function(int, int)? onReceiveProgress,
   }) async{
     print("post");
-    return await Dio().post(pass, 
+    print(const String.fromEnvironment('BASE_URL') + pass);
+    return await Dio().post(const String.fromEnvironment('BASE_URL') + pass, 
       data:data, 
       queryParameters:queryParameters, 
       options: Options(

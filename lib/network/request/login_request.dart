@@ -9,7 +9,8 @@ class LoginRequest {
   static Future<dynamic> login(String email, String passowrd) async {
     var result;
     try {
-      result = await ApiSearvice.post('http://localhost/app.api/login',
+      result = await ApiSearvice.post('/login',
+      
         data: new FormData.fromMap(
           {
             // "email": email,

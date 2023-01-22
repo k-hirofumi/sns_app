@@ -54,7 +54,6 @@ class _NewPostState extends State<NewPost> {
       for(var i = 0; i < items.length; i++){
         i == 0 ? timeLineText += items[i].controller.text : timeLineText += '|' + items[i].controller.text;
       }
-      print(timeLineText);
       // await appProvider.login();
     }
   }

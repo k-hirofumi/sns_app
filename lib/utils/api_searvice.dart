@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:sns_app/navigation/main.dart';
 import 'package:sns_app/providers/appProvider.dart';
 import 'package:sns_app/utils/instance_store.dart';
@@ -17,7 +18,9 @@ extension ApiSearvice on Dio {
     // CancelToken? cancelToken,
     // void Function(int, int)? onReceiveProgress,
   }) async{
-    print("get");
+    if (kDebugMode) {
+      print("get ${pass}");
+    }
     return await Dio().get(const String.fromEnvironment('BASE_URL') + pass,
       queryParameters: queryParameters,
       options: Options(
@@ -27,11 +30,15 @@ extension ApiSearvice on Dio {
         },
       ),
     ).then((response) {
-      print(response.data);
+      if (kDebugMode) {
+        print(response.data);
+      }
       return response.data;
     }).catchError((onError){
       //ハンドリングしていないエラーが発生した場合
-      print(onError);
+      if (kDebugMode) {
+        print(onError);
+      }
       MainNav.showUnexpectErrorDialog();
       return null;
     });
@@ -46,8 +53,9 @@ extension ApiSearvice on Dio {
     // void Function(int, int)? onSendProgress,
     // void Function(int, int)? onReceiveProgress,
   }) async{
-    print("post");
-    print(const String.fromEnvironment('BASE_URL') + pass);
+    if (kDebugMode) {
+      print("post ${pass}" );
+    }
     return await Dio().post(const String.fromEnvironment('BASE_URL') + pass, 
       data:data, 
       queryParameters:queryParameters, 
@@ -58,11 +66,15 @@ extension ApiSearvice on Dio {
         },
       ),
     ).then((response) {
-      print(response.data);
+      if (kDebugMode) {
+        print(response.data);
+      }
       return response.data;
     }).catchError((onError){
       //ハンドリングしていないエラーが発生した場合
-      print(onError);
+      if (kDebugMode) {
+        print(onError);
+      }
       MainNav.showUnexpectErrorDialog();
       return null;
     });

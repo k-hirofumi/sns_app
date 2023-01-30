@@ -3,7 +3,6 @@ import 'package:sns_app/navigation/main.dart';
 import 'package:sns_app/network/request/new_post_request.dart';
 import 'package:sns_app/utils/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sns_app/network/request/get_user_info_request.dart';
 import 'package:sns_app/network/request/login_request.dart';
 
 class AppProvider with ChangeNotifier {

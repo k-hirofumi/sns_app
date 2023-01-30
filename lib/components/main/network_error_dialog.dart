@@ -19,10 +19,10 @@ class NetworkErrorDialog extends StatelessWidget {
     bool? ngButton,
     String? ngButtonTitle,
     this.ngButtonAction,
-    }) : this.okButton = okButton ?? false,
-         this.okButtonTitle = okButtonTitle ?? "はい",
-         this.ngButton = ngButton ?? false,
-         this.ngButtonTitle = ngButtonTitle ?? "いいえ",
+    }) : okButton = okButton ?? false,
+         okButtonTitle = okButtonTitle ?? "はい",
+         ngButton = ngButton ?? false,
+         ngButtonTitle = ngButtonTitle ?? "いいえ",
      super(key: key);
 
   @override
@@ -31,14 +31,14 @@ class NetworkErrorDialog extends StatelessWidget {
     final contentText = title != null ? Text(content!) : null;
     final okButtonArea = okButton! 
       ?  GestureDetector(
-          child: Text(okButtonTitle!),
-          onTap: okButtonAction ?? ()=>Navigator.pop(context)
+          onTap: okButtonAction ?? ()=>Navigator.pop(context),
+          child: Text(okButtonTitle!)
         )
       : null;
     final ngButtonArea = ngButton! 
       ?  GestureDetector(
-          child: Text(ngButtonTitle!),
-          onTap: ngButtonAction ?? ()=>Navigator.pop(context)
+          onTap: ngButtonAction ?? ()=>Navigator.pop(context),
+          child: Text(ngButtonTitle!)
         )
       : null;
 

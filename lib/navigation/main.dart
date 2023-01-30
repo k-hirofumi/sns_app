@@ -7,12 +7,12 @@ import '../pages/post/post.dart';
 
 class MainNav{
     static final mainRoutes = <String,WidgetBuilder>{
-    "/" : (context) => MainPage(),
+    "/" : (context) => const MainPage(),
     // "/addNewPost" : (context) => NewPost(),
-    "/login" : (context) => LoginForm(),
+    "/login" : (context) => const LoginForm(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState  _navigatorState = navigatorKey.currentState!;
+  static NavigatorState get _navigatorState => navigatorKey.currentState!;
   static NavigatorState get navigatorState => _navigatorState;
 
 
@@ -28,7 +28,7 @@ class MainNav{
     await showDialog<void>(
     context: _navigatorState.context,
     builder: (_) {
-      return NetworkUnexpectErrorDialog();
+      return const NetworkUnexpectErrorDialog();
     });
   }
 
@@ -64,7 +64,7 @@ class MainNav{
     // return _navigatorState.pushNamed('/addNewPost');
     return _navigatorState.push(
       MaterialPageRoute(
-        builder: (_) => NewPost(),
+        builder: (_) => const NewPost(),
         fullscreenDialog: true, // true だとモーダル遷移になる
       ),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sns_app/utils/instance_store.dart';
-import 'package:sns_app/navigation/main.dart';
 import 'package:sns_app/providers/accountProvider.dart';
 import 'package:sns_app/providers/appProvider.dart';
 
@@ -42,9 +41,9 @@ class _LoginFormState extends State<LoginForm> {
             children: [
                 Container(
                   width: 320,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 73, 248, 237),
+                    color: const Color.fromARGB(255, 73, 248, 237),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: Colors.black.withOpacity(0.3)),
                   ),
@@ -52,8 +51,8 @@ class _LoginFormState extends State<LoginForm> {
                     key: _formKey,
                     child:Column(
                       children: [
-                        Padding(padding: EdgeInsets.all(15)),
-                        Container(
+                        const Padding(padding: EdgeInsets.all(15)),
+                        SizedBox(
                           width: 280,
                           child:TextFormField(
                             controller: emailInputController,
@@ -78,8 +77,8 @@ class _LoginFormState extends State<LoginForm> {
                             // onChanged: _controllerText,
                           ),
                         ),
-                        Padding(padding: EdgeInsets.all(10)),
-                        Container(
+                        const Padding(padding: EdgeInsets.all(10)),
+                        SizedBox(
                           width: 280,
                           child:TextFormField(
                             controller: passwordInputController,
@@ -104,13 +103,13 @@ class _LoginFormState extends State<LoginForm> {
                             // onChanged: _controllerText,
                           ),
                         ),
-                        Padding(padding: EdgeInsets.all(15)),
-                        Container(
+                        const Padding(padding: EdgeInsets.all(15)),
+                        SizedBox(
                           width: 220,
                           height: 40,
-                          child: ElevatedButton(onPressed: submit, child: Text("ログイン")),
+                          child: ElevatedButton(onPressed: submit, child: const Text("ログイン")),
                         ),
-                        Padding(padding: EdgeInsets.all(15)),
+                        const Padding(padding: EdgeInsets.all(15)),
                       ]
                     )
                   )
@@ -130,10 +129,4 @@ class _LoginFormState extends State<LoginForm> {
       home: form,
     );
   }
-    
-    
-    
-    
-    
-
 }

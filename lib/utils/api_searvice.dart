@@ -17,7 +17,13 @@ extension ApiSearvice on Dio {
     // CancelToken? cancelToken,
     // void Function(int, int)? onReceiveProgress,
   }) async{
+<<<<<<< Updated upstream
     print("get");
+=======
+    if (kDebugMode) {
+      print("get $pass");
+    }
+>>>>>>> Stashed changes
     return await Dio().get(const String.fromEnvironment('BASE_URL') + pass,
       queryParameters: queryParameters,
       options: Options(
@@ -46,8 +52,14 @@ extension ApiSearvice on Dio {
     // void Function(int, int)? onSendProgress,
     // void Function(int, int)? onReceiveProgress,
   }) async{
+<<<<<<< Updated upstream
     print("post");
     print(const String.fromEnvironment('BASE_URL') + pass);
+=======
+    if (kDebugMode) {
+      print("post $pass" );
+    }
+>>>>>>> Stashed changes
     return await Dio().post(const String.fromEnvironment('BASE_URL') + pass, 
       data:data, 
       queryParameters:queryParameters, 

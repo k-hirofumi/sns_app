@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sns_app/components/post/post.dart';
-import 'package:sns_app/components/post/post_account.dart';
-import 'package:sns_app/components/post/post_image.dart';
-import 'package:sns_app/components/post/post_timeLine.dart';
-import 'package:sns_app/network/mock/posts_mock.dart';
 import 'package:sns_app/network/model/postInfo_response.dart';
 import 'package:sns_app/network/request/home_request.dart';
 import '../../navigation/home.dart';

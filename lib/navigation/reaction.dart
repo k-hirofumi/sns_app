@@ -4,11 +4,11 @@ import '../pages/post/post.dart';
 
 class ReactionNav{
     static final reactionRoutes = <String,WidgetBuilder>{
-    "/" : (context) => ReactionScreen(),
-    "/reaction/second" : (context) => NewPost(),
+    "/" : (context) => const ReactionScreen(),
+    "/reaction/second" : (context) => const NewPost(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState  _navigatorState = navigatorKey.currentState!;
+  static NavigatorState get _navigatorState => navigatorKey.currentState!;
   static NavigatorState get navigatorState => _navigatorState;
 
 

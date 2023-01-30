@@ -75,7 +75,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('appn_info'),
+        title: const Text('appn_info'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -9,7 +9,7 @@ class HomeSecond extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _provider = context.watch<HomeProvider>();
+    final provider = context.watch<HomeProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -23,12 +23,12 @@ class HomeSecond extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: (() => _provider.countUp()), child: const Text('カウントUP！')),
+                  ElevatedButton(onPressed: (() => provider.countUp()), child: const Text('カウントUP！')),
                   const Padding(padding: EdgeInsets.only(left: 10, right: 10)),
-                  ElevatedButton(onPressed: (() => _provider.countClear()), child: const Text('クリア')),
+                  ElevatedButton(onPressed: (() => provider.countClear()), child: const Text('クリア')),
                 ],
               ),
-              Text(_provider.cnt.toString(), style: const TextStyle(fontSize: 60.0),),
+              Text(provider.cnt.toString(), style: const TextStyle(fontSize: 60.0),),
             ],
           ),
 

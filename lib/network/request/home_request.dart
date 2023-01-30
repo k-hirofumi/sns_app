@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:sns_app/navigation/main.dart';
-import 'package:sns_app/network/mock/posts_mock.dart';
 import 'package:sns_app/network/model/error_response.dart';
 import 'package:sns_app/network/model/postInfo_response.dart';
 import 'package:sns_app/utils/api_searvice.dart';

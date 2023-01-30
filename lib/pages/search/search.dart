@@ -17,10 +17,10 @@ class SearchScreen extends StatelessWidget {
         child: Center(
            child: Column(
             children: [
-              Text('探す画面', style: TextStyle(fontSize: 32.0)),
+              const Text('探す画面', style: TextStyle(fontSize: 32.0)),
               ElevatedButton(
                 onPressed: toSearchSecond, 
-                child: Text("次へ"))
+                child: const Text("次へ"))
             ],
            )
         ),

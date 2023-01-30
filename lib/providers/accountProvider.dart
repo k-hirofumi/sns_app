@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sns_app/utils/instance_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sns_app/network/model/userInfo_response.dart';
 import 'package:sns_app/network/request/get_user_info_request.dart';
 
 class AccountProvider with ChangeNotifier {

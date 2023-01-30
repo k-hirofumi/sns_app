@@ -5,11 +5,11 @@ import '../pages/post/post.dart';
 
 class AccountNav{
     static final accountRoutes = <String,WidgetBuilder>{
-    "/" : (context) => AccountScreen(),
-    "/account/second" : (context) => NewPost(),
+    "/" : (context) => const AccountScreen(),
+    "/account/second" : (context) => const NewPost(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState  _navigatorState = navigatorKey.currentState!;
+  static NavigatorState get _navigatorState => navigatorKey.currentState!;
   static NavigatorState get navigatorState => _navigatorState;
 
 

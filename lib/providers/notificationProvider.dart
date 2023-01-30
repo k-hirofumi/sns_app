@@ -8,8 +8,6 @@ class NotificationProvider with ChangeNotifier {
   InstanceStore get _store => InstanceStore();
   SharedPreferences get _pref => _store.getInstance<SharedPreferences>();
 
-  final String firstName = "Jboy";
-  final String lastName = "Hashimoto";
   int age = 0;
 
   void say() {

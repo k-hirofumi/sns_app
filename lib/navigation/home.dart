@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:sns_app/pages/home/home_pecond.dart';
 import '../pages/home/home.dart';
-import '../pages/post/post.dart';
 
 class HomeNav{
     static final homeRoutes = <String,WidgetBuilder>{
-    "/" : (context) => HomeScreen(),
-    "/home/second" : (context) => HomeSecond(),
+    "/" : (context) => const HomeScreen(),
+    "/home/second" : (context) => const HomeSecond(),
   };
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-  static NavigatorState  _navigatorState = navigatorKey.currentState!;
+  static NavigatorState get _navigatorState => navigatorKey.currentState!;
   static NavigatorState get navigatorState => _navigatorState;
 
 

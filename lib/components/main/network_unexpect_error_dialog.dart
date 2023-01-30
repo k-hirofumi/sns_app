@@ -6,11 +6,11 @@ class NetworkUnexpectErrorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('通信に失敗しました。'),
-      content: Text('お手数ですが、運営までご連絡ください'),
+      title: const Text('通信に失敗しました。'),
+      content: const Text('お手数ですが、運営までご連絡ください'),
       actions: <Widget>[
         GestureDetector(
-          child: Text('はい'),
+          child: const Text('はい'),
           onTap: () {
             Navigator.pop(context);
           },

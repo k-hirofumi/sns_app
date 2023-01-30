@@ -28,7 +28,7 @@ void main() async{
   store.setInstance<ReactionProvider>(ReactionProvider());
   store.setInstance<AccountProvider>(AccountProvider());
   
-  store.getInstance<HomeProvider>().loadCount();
+  // store.getInstance<HomeProvider>().loadCount();
 
   runApp(
     MultiProvider(
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: MainNav.navigatorKey,
-      title: 'Flutter Demo',
+      title: 'SNS',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),

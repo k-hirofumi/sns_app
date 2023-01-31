@@ -11,28 +11,19 @@ class PostTimeLine extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for(var line in post) 
-<<<<<<< Updated upstream
           Container( 
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(line.period), 
-                Container(margin: EdgeInsets.only(left: 5),width: 200, child: Text(line.event,overflow: TextOverflow.clip)) 
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 5), 
+                    child: Text(line.event,overflow: TextOverflow.clip)
+                  )
+                )
               ]
             )
-=======
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(line.period), 
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 5), 
-                  child: Text(line.event,overflow: TextOverflow.clip)
-                )
-              )
-            ]
->>>>>>> Stashed changes
           )
         ] ,
     );

@@ -27,9 +27,13 @@ class Post extends StatelessWidget {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PostTimeLine(post: postInfoResponse.timeLine),
-              Spacer(),
+              Expanded(
+                child:PostTimeLine(
+                  post: postInfoResponse.timeLine
+                )
+              ),
               PostImage(imagesPath: postInfoResponse.images),
             ],
           ),

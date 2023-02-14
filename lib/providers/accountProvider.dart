@@ -19,14 +19,12 @@ class AccountProvider with ChangeNotifier {
 
   Future<void> getUserInfo() async{
       final result = await GetUserInfoRequest.getUserInfo();
-      // UserInfoResponse? _userInfo = UserInfoResponse.fromJson(result);
       if(result != null){
       _userId = result!.userId;
       _name = result!.name;
       _email = result!.email;
       }
 
-    // _pref.setBool('isLogin', _isLogin);
     notifyListeners();
   }
 }

@@ -14,9 +14,6 @@ extension ApiSearvice on Dio {
   static Future<dynamic> get(
     String pass, {
     Map<String, dynamic>? queryParameters,
-    // Options? options,
-    // CancelToken? cancelToken,
-    // void Function(int, int)? onReceiveProgress,
   }) async{
     if (kDebugMode) {
       print("get $pass");
@@ -31,11 +28,15 @@ extension ApiSearvice on Dio {
         },
       ),
     ).then((response) {
-      print(response.data);
+      if (kDebugMode) {
+        print(response.data);
+      }
       return response.data;
     }).catchError((onError){
       //ハンドリングしていないエラーが発生した場合
-      print(onError);
+      if (kDebugMode) {
+        print(onError);
+      }
       MainNav.showUnexpectErrorDialog();
       return null;
     });
@@ -45,10 +46,7 @@ extension ApiSearvice on Dio {
     String pass,{
     dynamic data,
     Map<String, dynamic>? queryParameters,
-    // Options? options,
-    // CancelToken? cancelToken,
-    // void Function(int, int)? onSendProgress,
-    // void Function(int, int)? onReceiveProgress,
+
   }) async{
     if (kDebugMode) {
       print("post $pass" );
@@ -63,11 +61,15 @@ extension ApiSearvice on Dio {
         },
       ),
     ).then((response) {
-      print(response.data);
+      if (kDebugMode) {
+        print(response.data);
+      }
       return response.data;
     }).catchError((onError){
       //ハンドリングしていないエラーが発生した場合
-      print(onError);
+      if (kDebugMode) {
+        print(onError);
+      }
       MainNav.showUnexpectErrorDialog();
       return null;
     });
